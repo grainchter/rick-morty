@@ -17,6 +17,9 @@
 nvm use 24.14.0
 ```
 
+- .env файл
+  VITE_API_URL="[link-to-api](https://rickandmortyapi.com/api)"
+
 ## Установка зависимостей
 
 ```bash
