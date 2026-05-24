@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import Card from '@/modules/shared/ui/Card/Card.vue';
-import CardSkeleton from '@/modules/shared/ui/Card/CardSkeleton.vue';
-import Badge from '@/modules/shared/ui/Badge/Badge.vue';
-import CircleIcon from '@/modules/shared/ui/icons/CircleIcon.vue';
-import Pagination from '@/modules/shared/ui/Pagination/Pagination.vue';
+import { Card, CardSkeleton, Badge, Pagination } from '@/modules/shared/ui';
+import { CircleIcon } from '@/modules/shared/icons';
 import { useCharactersFiltersStore } from '@/stores/charactersFiltersStore';
 import { useCharactersQuery } from '../composables/useCharactersQuery';
 import type { CharacterApiResponse } from '../api/types';

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Search from '../icons/Search.vue';
+import { Search } from '@/modules/shared/icons';
 
 const model = defineModel<string>({ default: '' });
 interface Props {

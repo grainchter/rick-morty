@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import FilterSidebar from '@/modules/shared/ui/FilterSidebar/FilterSidebar.vue';
-import FilterGroup from '@/modules/shared/ui/FilterGroup/FilterGroup.vue';
-import SearchInput from '@/modules/shared/ui/SearchInput/SearchInput.vue';
-import Switch from '@/modules/shared/ui/Switch/Switch.vue';
-import Select from '@/modules/shared/ui/Select/Select.vue';
+import { FilterSidebar, FilterGroup, SearchInput, Switch, Select } from '@/modules/shared/ui';
 import { speciesOptions } from '@/modules/shared/config';
 import { debounce } from '@/modules/shared/utils/debounce';
 import { useCharactersFiltersStore } from '@/stores/charactersFiltersStore';

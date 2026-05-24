@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import ChevronDown from '../icons/ChevronDown.vue';
+import { ChevronDown } from '@/modules/shared/icons';
 
 interface Props {
   title?: string;

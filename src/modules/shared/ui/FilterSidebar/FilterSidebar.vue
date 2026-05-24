@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
-import { ChevronLeft, ChevronRight } from '../icons';
+import { ChevronLeft, ChevronRight } from '../../icons';
 
 const isOpen = ref(true);
 

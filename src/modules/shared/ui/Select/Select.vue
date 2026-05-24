@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue';
-import ChevronDown from '../icons/ChevronDown.vue';
+import { ChevronDown } from '@/modules/shared/icons';
 
 interface Props {
   modelValue?: string;

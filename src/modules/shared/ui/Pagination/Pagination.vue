@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
-import { ChevronLeft, ChevronRight } from '../icons';
+import { ChevronLeft, ChevronRight } from '@/modules/shared/icons';
 
 interface Props {
   currentPage: number;
