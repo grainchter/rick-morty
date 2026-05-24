@@ -3,33 +3,27 @@ import { computed } from 'vue';
 import { ChevronLeft, ChevronRight } from '@/modules/shared/icons';
 
 interface Props {
-  currentPage: number;
   totalPages: number;
 }
 
 const props = defineProps<Props>();
 
-const emit = defineEmits<{
-  (e: 'update:currentPage', page: number): void;
-}>();
+const currentPage = defineModel<number>('currentPage', { required: true });
 
 const fillPercentage = computed(() => {
   if (!props.totalPages || props.totalPages === 1) return 100;
-
-  return ((props.currentPage - 1) / (props.totalPages - 1)) * 100;
+  return ((currentPage.value - 1) / (props.totalPages - 1)) * 100;
 });
 
 function goPrev() {
-  if (props.currentPage > 1) {
-    const newPage = props.currentPage - 1;
-    emit('update:currentPage', newPage);
+  if (currentPage.value > 1) {
+    currentPage.value = currentPage.value - 1;
   }
 }
 
 function goNext() {
-  if (props.currentPage < props.totalPages) {
-    const newPage = props.currentPage + 1;
-    emit('update:currentPage', newPage);
+  if (currentPage.value < props.totalPages) {
+    currentPage.value = currentPage.value + 1;
   }
 }
 </script>

@@ -1,33 +1,20 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
 import { ChevronDown } from '@/modules/shared/icons';
 
 interface Props {
   title?: string;
-  modelValue?: boolean;
 }
 
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: boolean): void;
   (e: 'toggle'): void;
 }>();
 
-const isOpen = ref(props.modelValue ?? false);
-
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    if (newVal !== undefined) {
-      isOpen.value = newVal;
-    }
-  },
-);
+const isOpen = defineModel<boolean>({ default: false });
 
 function toggle() {
   isOpen.value = !isOpen.value;
-  emit('update:modelValue', isOpen.value);
   emit('toggle');
 }
 

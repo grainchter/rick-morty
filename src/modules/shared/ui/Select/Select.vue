@@ -1,27 +1,19 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { ChevronDown } from '@/modules/shared/icons';
 
 interface Props {
-  modelValue?: string;
   options: string[];
   placeholder?: string;
 }
 
 const props = defineProps<Props>();
 
-const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
-}>();
+const modelValue = defineModel<string>({ default: '' });
 
 const isOpen = ref(false);
 const triggerRef = ref<HTMLElement | null>(null);
 const dropdownStyle = ref({ top: '0px', left: '0px', width: '0px' });
-
-const value = computed({
-  get: () => props.modelValue ?? '',
-  set: (val: string) => emit('update:modelValue', val),
-});
 
 function toggle() {
   if (!isOpen.value) updateDropdownPosition();
@@ -41,7 +33,7 @@ function updateDropdownPosition() {
 }
 
 function selectOption(opt: string) {
-  value.value = opt;
+  modelValue.value = opt;
   isOpen.value = false;
 }
 
@@ -75,7 +67,7 @@ onUnmounted(() => {
     type="button",
     @click="toggle",
     :class="{ 'select__trigger--open': isOpen }")
-    span.select__value {{ value || placeholder || 'Select...' }}
+    span.select__value {{ modelValue || placeholder || 'Select...' }}
 
     .select__icon
       ChevronDown
@@ -89,7 +81,7 @@ onUnmounted(() => {
           v-for="opt in options",
           :key="opt",
           @click="selectOption(opt)",
-          :class="{ 'select__item--selected': opt === value }") {{ opt }}
+          :class="{ 'select__item--selected': opt === modelValue }") {{ opt }}
 </template>
 
 <style lang="scss" scoped>
