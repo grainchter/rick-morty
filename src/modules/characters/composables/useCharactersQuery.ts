@@ -18,16 +18,24 @@ function getRateLimitDelay(error: unknown): number {
 export function useCharactersQuery(filters: Ref<CharacterFilters>) {
   return useQuery({
     queryKey: ['characters', filters],
-    queryFn: () => getCharacters(filters.value),
+    queryFn: async () => {
+      try {
+        return await getCharacters(filters.value);
+      } catch (error) {
+        if (error instanceof ApiError && error.response.status === 404) {
+          return { info: { count: 0, pages: 0, next: null, prev: null }, results: [] };
+        }
+        throw error;
+      }
+    },
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
 
     retry: (failureCount, error) => {
       if (failureCount >= 5) return false;
-
+      if (error instanceof ApiError && error.response.status === 404) return false;
       if (error instanceof ApiError && error.response.status === 429) return true;
       if (error instanceof TypeError) return true;
-
       return false;
     },
 

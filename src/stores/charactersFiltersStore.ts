@@ -1,5 +1,4 @@
 import { debounce } from '@/modules/shared/utils/debounce';
-
 import { defineStore } from 'pinia';
 import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
@@ -15,16 +14,19 @@ export const useCharactersFiltersStore = defineStore('filters', () => {
   const species = ref('All');
   const page = ref(1);
 
+  let isInternalUpdate = false;
+
   // чтение фильтров из URL (вызывается при инициализации и при изменении query)
   function syncFromUrl() {
+    isInternalUpdate = true;
     const query = route.query;
     name.value = (query.name as string) || '';
     status.value = (query.status as Status) || '';
     species.value = (query.species as string) || 'All';
     page.value = query.page ? Number(query.page) : 1;
     if (isNaN(page.value)) page.value = 1;
+    isInternalUpdate = false;
   }
-
   // обновление URL при изменении фильтров
   const updateUrlDebounced = debounce(() => {
     const query: Record<string, string> = {};
@@ -32,16 +34,17 @@ export const useCharactersFiltersStore = defineStore('filters', () => {
     if (status.value) query.status = status.value;
     if (species.value && species.value !== 'All') query.species = species.value;
     if (page.value !== 1) query.page = String(page.value);
-
     router.replace({ path: route.path, query });
   }, 300);
 
-  watch([name, status, species, page], () => {
-    updateUrlDebounced();
+  watch([name, status, species], () => {
+    if (!isInternalUpdate && page.value !== 1) {
+      page.value = 1;
+    }
   });
 
-  watch([name, status, species], () => {
-    if (page.value !== 1) page.value = 1;
+  watch([name, status, species, page], () => {
+    updateUrlDebounced();
   });
 
   watch(
