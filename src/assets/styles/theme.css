@@ -1,0 +1,70 @@
+:root {
+  /* Neutral palette */
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+  --neutral-950: #0a0a0a;
+
+  /* Semantic colors */
+  --background: #ffffff;
+  --foreground: var(--neutral-900);
+  --card: #ffffff;
+  --card-foreground: var(--neutral-900);
+  --border: var(--neutral-200);
+  --input-background: #ffffff;
+  --input-border: var(--neutral-200);
+  --input-placeholder: var(--neutral-400);
+  --input-focus-border: var(--neutral-400);
+  --ring: var(--neutral-400);
+
+  /* Sidebar */
+  --sidebar-width: min(20rem, 90dvw);
+  --sidebar-width-mobile: 100dvw;
+  --sidebar-animation-duration: 0.3s;
+
+  /* Pagination */
+  --pagination-background: #171717;
+  --pagination-gradient-from: #262626;
+  --pagination-gradient-to: #404040;
+
+  /* Switch */
+  --switch-bg: var(--neutral-200);
+  --switch-checked-bg: var(--neutral-900);
+  --switch-thumb: #ffffff;
+  --switch-thumb-dark: var(--neutral-900);
+
+  /* Select */
+  --select-bg: #ffffff;
+  --select-border: var(--neutral-200);
+  --select-text: var(--neutral-900);
+  --select-item-hover: var(--neutral-100);
+
+  /* Radius */
+  --radius: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.875rem;
+
+  /* Typography */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-size-base: 16px;
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-size: var(--font-size-base);
+}

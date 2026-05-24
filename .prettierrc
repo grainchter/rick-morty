@@ -1,0 +1,9 @@
+{
+  "plugins": ["@prettier/plugin-pug"],
+  "printWidth": 100,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "pugSingleQuote": false,
+  "pugBracketSameLine": true,
+  "pugSemi": false
+}
