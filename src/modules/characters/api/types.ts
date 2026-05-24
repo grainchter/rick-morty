@@ -4,7 +4,8 @@ export interface CharacterFilters {
   status?: 'alive' | 'dead' | 'unknown' | '';
   species?: string;
   type?: string;
-  gender?: 'femail' | 'male' | 'genderless' | 'unknown' | '';
+  gender?: 'female' | 'male' | 'genderless' | 'unknown' | '';
+  [key: string]: string | number | boolean | null | undefined;
 }
 
 export interface CharacterApiResponse {

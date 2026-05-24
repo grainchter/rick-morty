@@ -8,4 +8,4 @@ export const speciesOptions: string[] = [
   'Cronenberg',
   'Disease',
   'Mythological Creature',
-] as const
+] as const;

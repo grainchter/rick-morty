@@ -1,73 +1,56 @@
-# .
+## Стек
 
-This template should help get you started developing with Vue 3 in Vite.
+- Vue 3 (Composition API)
+- TypeScript
+- Pinia
+- Vue Router
+- Pug
+- SCSS
+- Playwright
+- Vite
 
-## Recommended IDE Setup
+## Требования
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- Node.js v24.14.0
 
-## Recommended Browser Setup
+```bash
+nvm use 24.14.0
+```
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## Установка зависимостей
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+## Запуск в режиме разработки
 
-```sh
+```bash
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+## E2E тесты (Playwright)
 
-```sh
-npm run build
-```
+Запуск тестов:
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Playwright](https://playwright.dev)
-
-```sh
-# Install browsers for the first run
-npx playwright install
-
-# When testing on CI, must build the project first
-npm run build
-
-# Runs the end-to-end tests
+```bash
 npm run test:e2e
-# Runs the tests only on Chromium
-npm run test:e2e -- --project=chromium
-# Runs the tests of a specific file
-npm run test:e2e -- tests/example.spec.ts
-# Runs the tests in debug mode
-npm run test:e2e -- --debug
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Проект покрыт E2E тестами, которые проверяют сценарии:
 
-```sh
-npm run lint
-```
+- поиск персонажей по имени через фильтры
+- работу пагинации с учётом фильтров
+- корректное открытие и закрытие сайдбара
+- стабильность интерфейса при взаимодействии с overlay и UI-слоями
+- отображение карточек персонажей на основе мокированных данных API
+
+## Архитектура
+
+Проект разделён на слои:
+
+- **modules/characters** — бизнес-логика и отображение
+- **modules/shared/ui** — переиспользуемые UI компоненты
+- **modules/shared/api** — API клиент
+- **stores** — глобальное состояние (Pinia)
+- **router** — маршрутизация

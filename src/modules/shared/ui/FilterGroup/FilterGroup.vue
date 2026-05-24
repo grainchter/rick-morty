@@ -86,13 +86,12 @@ defineExpose({ isOpen, toggle });
 }
 
 .filter-group__content {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.25s ease-in-out;
+  max-height: 0;
   overflow: hidden;
+  transition: max-height 0.2s ease-in-out;
 
   &--open {
-    grid-template-rows: 1fr;
+    max-height: 500px;
   }
 }
 

@@ -33,9 +33,9 @@ export async function apiFetch<T>(
   endpoint: string,
   options: {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-    body?: any;
+    body?: Record<string, unknown> | unknown[] | string | number | boolean | null;
     headers?: HeadersInit;
-    params?: Record<string, any>;
+    params?: Record<string, unknown>;
     signal?: AbortSignal;
   } = {},
   config: ApiClientConfig = {},
@@ -78,12 +78,13 @@ export async function apiFetch<T>(
   if (contentType && contentType.includes('application/json')) {
     try {
       responseData = await response.json();
-    } catch (e) {}
+    } catch {
+      // невалидный JSON
+    }
   } else {
     responseData = await response.text();
   }
 
-  // Cтатус не 2xx
   if (!response.ok) {
     throw new ApiError(response.status, response.statusText, responseData);
   }
