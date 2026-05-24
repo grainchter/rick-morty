@@ -27,7 +27,7 @@ const setStatus = (newStatus: 'alive' | 'dead' | 'unknown' | '') => {
 <template lang="pug">
 FilterSidebar
   template(#header)
-    h2 Фильтры
+    h2 Filters
 
   FilterGroup(title="Search", :modelValue="true")
     SearchInput(v-model="searchModel", placeholder="Search by name...")

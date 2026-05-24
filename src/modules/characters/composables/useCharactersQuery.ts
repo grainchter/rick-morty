@@ -1,8 +1,19 @@
 import { getCharacters } from '../api/endpoints';
 import type { CharacterFilters } from '../api/types';
-
+import { ApiError } from '@/modules/shared/api/client';
 import { useQuery } from '@tanstack/vue-query';
 import type { Ref } from 'vue';
+
+function getRateLimitDelay(error: unknown): number {
+  if (error instanceof ApiError && error.response.status === 429) {
+    const retryAfter = error.response.headers.get('Retry-After');
+    if (retryAfter) {
+      const seconds = parseInt(retryAfter, 10);
+      if (!isNaN(seconds)) return seconds * 1000;
+    }
+  }
+  return 5000;
+}
 
 export function useCharactersQuery(filters: Ref<CharacterFilters>) {
   return useQuery({
@@ -10,11 +21,18 @@ export function useCharactersQuery(filters: Ref<CharacterFilters>) {
     queryFn: () => getCharacters(filters.value),
     staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
+
     retry: (failureCount, error) => {
-      // @ts-expect-error — у ошибки из queryFn есть поле response от fetch,
-      // но стандартный тип Error его не содержит
-      if (error?.response?.status === 404) return false;
-      return failureCount < 1;
+      if (failureCount >= 5) return false;
+
+      if (error instanceof ApiError && error.response.status === 429) return true;
+      if (error instanceof TypeError) return true;
+
+      return false;
+    },
+
+    retryDelay: (failureCount, error) => {
+      return getRateLimitDelay(error);
     },
   });
 }
