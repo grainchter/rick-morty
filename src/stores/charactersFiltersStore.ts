@@ -1,6 +1,6 @@
 import { debounce } from '@/modules/shared/utils/debounce';
 import { defineStore } from 'pinia';
-import { computed, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 export type Status = 'alive' | 'dead' | 'unknown' | '';
@@ -25,7 +25,9 @@ export const useCharactersFiltersStore = defineStore('filters', () => {
     species.value = (query.species as string) || 'All';
     page.value = query.page ? Number(query.page) : 1;
     if (isNaN(page.value)) page.value = 1;
-    isInternalUpdate = false;
+    nextTick(() => {
+      isInternalUpdate = false;
+    });
   }
   // обновление URL при изменении фильтров
   const updateUrlDebounced = debounce(() => {
