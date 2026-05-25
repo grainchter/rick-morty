@@ -78,7 +78,7 @@ Pagination(
   :total-pages="totalPages")
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .cards-grid {
   display: flex;
   flex-wrap: wrap;
